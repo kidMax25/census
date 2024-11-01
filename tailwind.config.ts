@@ -13,6 +13,10 @@ const config: Config = {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
 			customGray: '#F8F9FA',
+			metric1: '#FB6107',
+			metric2: '#2C2916',
+			metric3: '#7CB518',
+			metric4: '#FBB02D',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -56,7 +60,14 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		extend: {
+			fontFamily: {
+			  sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+			  mono: ['var(--font-ibm-plex-mono)', 'monospace'],
+			  display: ['var(--font-roboto)', 'system-ui', 'sans-serif'],
+			},
+		  }
   	}
   },
   plugins: [require("tailwindcss-animate")],

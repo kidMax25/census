@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+  },
   webpack: (
     config: any,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }: WebpackConfigContext

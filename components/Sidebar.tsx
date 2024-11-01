@@ -15,13 +15,13 @@ const Sidebar = ({ isLoading = false, className }: SidebarProps) => {
     return (
         <SidePanel className={className}>
           <div className="ml-3 mb-3">
-            <h1 className="text-2xl font-bold text-gray-900">Kenya 2019 Census</h1>
+            <h1 className="dashboard-title">Kenya 2019 Census</h1>
             {isLoading ? (
               <Skeleton className="h-8 w-40 mt-2" /> 
             ) : (
               <div className="ml-4 mt-2">
-                <span className="text-gray-600 text-sm">Population</span>
-                <p className="text-2xl font-semibold text-gray-900">56.4M</p>
+                <span className="dashboard-subtitle">Population</span>
+                <p className="stat-value">56.4M</p>
               </div>
             )}
           </div>
@@ -64,29 +64,29 @@ const Sidebar = ({ isLoading = false, className }: SidebarProps) => {
         </div>
       ) : (
         <div className="mt-6">
-  <div className="flex justify-between px-6 mb-6">
+  <div className="flex justify-between px-6 mb-4">
     <Speedometer
       value={78.8}
       maxValue={100}
-      lineColor="#3b82f6"
-      label="LITTERACY"
-      icon = {<UserRound size={20}/>}
+      lineColor="#FB6107"
+      label="Litteracy"
+      icon = {<UserRound size={15}/>}
     />
     <Speedometer
       value={85}
       maxValue={100}
-      lineColor="#10b981"
-      label="ELECTRICITY"
-      icon = {<Zap size={20}/>}
+      lineColor="#2C2916"
+      label="Electricity"
+      icon = {<Zap size={15}/>}
     />
   </div>
   <div className="flex justify-center">
     <Speedometer
       value={92.4}
       maxValue={100}
-      lineColor="#8b5cf6"
-      label="EDUCATION"
-      icon = {<NotebookPen size={20}/>}
+      lineColor="#FBB02D"
+      label="Education"
+      icon = {<NotebookPen size={15}/>}
     />
   </div>
 </div>

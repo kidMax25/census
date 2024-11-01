@@ -19,8 +19,8 @@ interface SpeedometerProps {
 const Speedometer = ({ 
   value, 
   maxValue, 
-  lineColor = '#3b82f6',
-  glowColor = '#60a5fa',
+  lineColor = '',
+  glowColor = '',
   className,
   label,
   icon,
@@ -32,8 +32,8 @@ const Speedometer = ({
   const [glowIntensity, setGlowIntensity] = useState(0);
   
   const targetPercentage = Math.min((value / maxValue) * 100, 100);
-  const strokeWidth = 4;
-  const radius = 40;
+  const strokeWidth = 2;
+  const radius = 30;
   const startAngle = 90;
   const endAngle = 330;
   const center = radius + strokeWidth;
@@ -101,7 +101,7 @@ const Speedometer = ({
   const progressOffset = pathLength * (1 - (animatedValue / 100));
 
   // Calculate dynamic filter values based on glow intensity
-  const blurRadius = 4 + (glowIntensity * 3);
+  const blurRadius = 4 + (glowIntensity * 2);
   const glowOpacity = 0.4 + (glowIntensity * 0.6);
 
   return (
@@ -128,7 +128,6 @@ const Speedometer = ({
             </filter>
           </defs>
           
-          {/* Background path */}
           <path
             d={progressPath}
             stroke="#e5e7eb"
@@ -136,7 +135,6 @@ const Speedometer = ({
             fill="none"
           />
           
-          {/* Glow effect path */}
           <path
             d={progressPath}
             stroke={glowColor}
@@ -165,7 +163,7 @@ const Speedometer = ({
         
         {/* Centered percentage and icon */}
         <div className="absolute inset-0 flex items-center justify-center space-x-1">
-          <span className="text-2xl font-bold text-gray-900 tabular-nums font-feature-settings-zero">
+          <span className="text-xl font-bold text-gray-900 tabular-nums font-feature-settings-zero">
             {Math.round(animatedValue)}
           </span>
           {icon && <div>{icon}</div>}
@@ -173,7 +171,7 @@ const Speedometer = ({
         
         {/* Label */}
         <div 
-          className="absolute flex justify-center text-xs uppercase font-medium text-gray-600"
+          className="absolute flex justify-center text-xs font-medium text-gray-600"
           style={{
             top: "68%",
             left: "78%",

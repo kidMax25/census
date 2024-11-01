@@ -6,10 +6,10 @@ import Sidebar from '../../components/Sidebar';
 import Speedometer from '@/components/Speedometer';
 import { BookOpen, GraduationCap, Zap } from 'lucide-react';
 import Map3D from '@/components/Map3D';
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading state
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -20,20 +20,21 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen bg-customGray">
-      <div>
-        <Sidebar isLoading={isLoading} className='bg-customGray border-none'/>
-        <div className="">
-        
+      {/* Sidebar Container with fixed positioning */}
+      <div className="fixed left-0 top-0 h-full z-50">
+        <Sidebar isLoading={isLoading} className="bg-customGray border-none" />
       </div>
-    </div>
-      <main className="flex-1 p-6">
-        {/* Map and other content will go here */}
-        <div className="h-full bg-white rounded-lg shadow-sm">
+
+      {/* Main content with margin to account for sidebar */}
+      <main className="flex-1 ml-[300px] p-6"> {/* Adjust ml-[300px] based on your sidebar width */}
+        <div className="h-[calc(100vh-48px)] bg-white rounded-lg shadow-sm overflow-hidden">
           {isLoading ? (
             <div className="w-full h-full animate-pulse bg-customGray" />
           ) : (
-            <div className="w-full h-full flex items-center bg-customGray justify-center text-gray-500">
-              <Map3D/>
+            <div className="w-full h-full relative">
+              <Map3D 
+                className="w-full h-full absolute inset-0" 
+              />
             </div>
           )}
         </div>

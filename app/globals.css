@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -34,6 +30,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -66,13 +63,55 @@ body {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Font feature settings for numbers */
+  .font-feature-settings-zero {
+    font-feature-settings: "zero" 1;
   }
 }
 
-@layer base {
-  .font-feature-settings-zero {
-    font-feature-settings: "zero" 1;
+@layer components {
+  /* Dashboard Typography Components */
+  .dashboard-title {
+    @apply text-2xl font-bold tracking-tight;
+  }
+
+  .dashboard-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .stat-card {
+    @apply rounded-lg border bg-card p-4 text-card-foreground shadow-sm;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold tracking-tight font-feature-settings-zero;
+  }
+
+  .stat-label {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+}
+
+@layer utilities {
+  /* Additional utility classes for data visualization */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .data-numeric {
+    @apply font-feature-settings-zero tabular-nums;
+  }
+
+  .chart-grid {
+    @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .chart-container {
+    @apply rounded-lg border bg-card p-4;
   }
 }
