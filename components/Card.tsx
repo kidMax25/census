@@ -1,11 +1,8 @@
-// components/Card.tsx
+// components/ui/card.tsx
 import React from 'react';
 import { Card as ShadCard, CardContent } from './ui/card';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../lib/utils';
 import { LucideIcon } from 'lucide-react';
-
-const cn = (...inputs: any[]) => twMerge(clsx(inputs));
 
 interface CardProps {
   title: string;
@@ -14,15 +11,15 @@ interface CardProps {
   className?: string;
 }
 
-const CustomCard = ({ 
+export const Card: React.FC<CardProps> = ({ 
   title, 
   subtitle, 
   icon: Icon,
   className 
-}: CardProps) => {
+}) => {
   return (
     <ShadCard className={cn("overflow-hidden hover:shadow-md transition-shadow", className)}>
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <div className="flex items-start gap-4">
           {Icon && (
             <div className="p-2 bg-gray-100 rounded-lg shrink-0">
@@ -45,4 +42,4 @@ const CustomCard = ({
   );
 };
 
-export default CustomCard;
+export default Card;

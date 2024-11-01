@@ -1,5 +1,4 @@
-// components/Speedometer.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -9,64 +8,183 @@ interface SpeedometerProps {
   value: number;
   maxValue: number;
   lineColor?: string;
+  glowColor?: string;
   className?: string;
   label?: string;
   icon?: React.ReactNode;
+  animationDuration?: number;
+  pulseFrequency?: number;
 }
 
 const Speedometer = ({ 
   value, 
   maxValue, 
   lineColor = '#3b82f6',
+  glowColor = '#60a5fa',
   className,
   label,
-  icon
+  icon,
+  animationDuration = 1500,
+  pulseFrequency = 1500
 }: SpeedometerProps) => {
-  const percentage = Math.min((value / maxValue) * 100, 100);
-  const strokeWidth = Math.max(2, Math.min(percentage / 10, 8));
+  const [animatedValue, setAnimatedValue] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [glowIntensity, setGlowIntensity] = useState(0);
+  
+  const targetPercentage = Math.min((value / maxValue) * 100, 100);
+  const strokeWidth = 4;
   const radius = 40;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const startAngle = 90;
+  const endAngle = 330;
+  const center = radius + strokeWidth;
+  const size = (radius + strokeWidth) * 2;
+
+  // Progress animation
+  useEffect(() => {
+    setIsAnimating(true);
+    const startTime = performance.now();
+    
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / animationDuration, 1);
+      
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = easeOutQuart * targetPercentage;
+      
+      setAnimatedValue(currentValue);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setIsAnimating(false);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+    
+    return () => {
+      setIsAnimating(false);
+    };
+  }, [targetPercentage, animationDuration]);
+
+  // Glow pulsing animation
+  useEffect(() => {
+    let startTime = performance.now();
+    
+    const animateGlow = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      
+      // Create a smooth sine wave for the glow intensity
+      const intensity = (Math.sin(elapsed * (2 * Math.PI) / pulseFrequency) + 1) / 2;
+      setGlowIntensity(intensity);
+      
+      requestAnimationFrame(animateGlow);
+    };
+    
+    const animationFrame = requestAnimationFrame(animateGlow);
+    
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [pulseFrequency]);
+
+  const calculatePath = (radius: number) => {
+    const x1 = center + radius * Math.cos((startAngle * Math.PI) / 180);
+    const y1 = center + radius * Math.sin((startAngle * Math.PI) / 180);
+    const x2 = center + radius * Math.cos((endAngle * Math.PI) / 180);
+    const y2 = center + radius * Math.sin((endAngle * Math.PI) / 180);
+    return `M ${x1} ${y1} A ${radius} ${radius} 0 1 1 ${x2} ${y2}`;
+  };
+
+  const progressPath = calculatePath(radius);
+  const pathLength = 2 * Math.PI * radius * (240 / 360);
+  const progressOffset = pathLength * (1 - (animatedValue / 100));
+
+  // Calculate dynamic filter values based on glow intensity
+  const blurRadius = 4 + (glowIntensity * 3);
+  const glowOpacity = 0.4 + (glowIntensity * 0.6);
 
   return (
-    <div className={cn("relative inline-flex flex-col items-center justify-center", className)}>
-      <svg className="w-32 h-32 transform -rotate-90">
-        <circle
-          cx="64"
-          cy="64"
-          r={radius}
-          stroke="#e5e7eb"
-          strokeWidth={strokeWidth}
-          fill="none"
-          className="transition-all duration-300"
-        />
-        <circle
-          cx="64"
-          cy="64"
-          r={radius}
-          stroke={lineColor}
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          fill="none"
-          className="transition-all duration-500 ease-out"
-        />
-      </svg>
-      <div className="absolute flex flex-col items-center justify-center">
-        <span className="text-2xl font-bold text-gray-900">
-          {Math.round(percentage)}%
-        </span>
-        <span className="text-xs text-gray-500">
-          {value.toLocaleString()} / {maxValue.toLocaleString()}
-        </span>
-      </div>
-      {(label || icon) && (
-        <div className="mt-2 flex items-center justify-center gap-2">
-          {icon}
-          {label && <span className="text-sm font-medium text-gray-700">{label}</span>}
+    <div className={cn("relative inline-flex items-center justify-center", className)}>
+      <div className="relative">
+        <svg width={size} height={size}>
+          {/* Define the glow filter */}
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation={blurRadius} result="blur" />
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 20 -10"
+                result="glow"
+              />
+              <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          
+          {/* Background path */}
+          <path
+            d={progressPath}
+            stroke="#e5e7eb"
+            strokeWidth={strokeWidth}
+            fill="none"
+          />
+          
+          {/* Glow effect path */}
+          <path
+            d={progressPath}
+            stroke={glowColor}
+            strokeWidth={strokeWidth + 2}
+            fill="none"
+            strokeDasharray={pathLength}
+            strokeDashoffset={progressOffset}
+            strokeLinecap="round"
+            style={{
+              filter: 'url(#glow)',
+              opacity: glowOpacity
+            }}
+          />
+          
+          {/* Main progress path */}
+          <path
+            d={progressPath}
+            stroke={lineColor}
+            strokeWidth={strokeWidth}
+            fill="none"
+            strokeDasharray={pathLength}
+            strokeDashoffset={progressOffset}
+            strokeLinecap="round"
+          />
+        </svg>
+        
+        {/* Centered percentage and icon */}
+        <div className="absolute inset-0 flex items-center justify-center space-x-1">
+          <span className="text-2xl font-bold text-gray-900 tabular-nums font-feature-settings-zero">
+            {Math.round(animatedValue)}
+          </span>
+          {icon && <div>{icon}</div>}
         </div>
-      )}
+        
+        {/* Label */}
+        <div 
+          className="absolute flex justify-center text-xs uppercase font-medium text-gray-600"
+          style={{
+            top: "68%",
+            left: "78%",
+            transform: "translate(-50%, 0)",
+            width: "130%",
+            textAlign: "center"
+          }}
+        >
+          {label}
+        </div>
+      </div>
     </div>
   );
 };
