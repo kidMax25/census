@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@deck.gl/core": "^9.0.34",
     "@deck.gl/layers": "^9.0.34",
     "@deck.gl/react": "^9.0.34",
@@ -28,6 +29,16 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
+=======
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.454.0",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "tailwind-merge": "^2.5.4"
+>>>>>>> 9c5b9c3682d35d15ff3b86366c0c1cbcd3fe2b0e
   },
   "devDependencies": {
     "@types/node": "^20",
