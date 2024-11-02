@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-<<<<<<< HEAD
 import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 
 const nextConfig: NextConfig = {
@@ -38,11 +37,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-=======
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
->>>>>>> 9c5b9c3682d35d15ff3b86366c0c1cbcd3fe2b0e

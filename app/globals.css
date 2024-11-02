@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -116,22 +115,3 @@
     @apply rounded-lg border bg-card p-4;
   }
 }
-=======
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
->>>>>>> 9c5b9c3682d35d15ff3b86366c0c1cbcd3fe2b0e
