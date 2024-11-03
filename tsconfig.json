@@ -13,10 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-<<<<<<< HEAD
     "typeRoots": ["./node_modules/@types", "./types"],
-=======
->>>>>>> 9c5b9c3682d35d15ff3b86366c0c1cbcd3fe2b0e
     "plugins": [
       {
         "name": "next"
@@ -24,12 +21,16 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "baseUrl": ".",
+    "types": ["react", "react-dom", "node"]
   },
-<<<<<<< HEAD
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types/**/*.d.ts"],
-=======
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
->>>>>>> 9c5b9c3682d35d15ff3b86366c0c1cbcd3fe2b0e
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
