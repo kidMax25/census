@@ -1,11 +1,9 @@
 // app/(main)/page.tsx
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Sidebar from '../../components/Sidebar';
-import Speedometer from '@/components/Speedometer';
-import { BookOpen, GraduationCap, Zap } from 'lucide-react';
-import Map3D from '@/components/Map3D';
+import KenyaMap from "@/components/map/kenya-map";
+import { useEffect, useState } from "react";
+import Sidebar from "../../components/Sidebar";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,15 +24,15 @@ export default function Home() {
       </div>
 
       {/* Main content with margin to account for sidebar */}
-      <main className="flex-1 ml-[300px] p-6"> {/* Adjust ml-[300px] based on your sidebar width */}
+      <main className="flex-1 ml-[300px] p-6">
+        {" "}
+        {/* Adjust ml-[300px] based on your sidebar width */}
         <div className="h-[calc(100vh-48px)] bg-white rounded-lg shadow-sm overflow-hidden">
           {isLoading ? (
             <div className="w-full h-full animate-pulse bg-customGray" />
           ) : (
             <div className="w-full h-full relative">
-              <Map3D 
-                className="w-full h-full absolute inset-0" 
-              />
+              <KenyaMap />
             </div>
           )}
         </div>

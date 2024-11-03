@@ -9,16 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@deck.gl/core": "^9.0.0",
-    "@deck.gl/layers": "^9.0.0",
-    "@deck.gl/react": "^9.0.0",
-    "@loaders.gl/core": "^4.1.0",
-    "@loaders.gl/shapefile": "^4.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/mapbox-gl": "^3.4.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "deck.gl": "^9.0.0",
     "lucide-react": "^0.321.0",
     "mapbox-gl": "^3.7.0",
     "next": "^14.2.16",

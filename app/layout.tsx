@@ -1,30 +1,31 @@
+import "mapbox-gl/dist/mapbox-gl.css";
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono, Roboto } from "next/font/google";
-import "./globals.css";
+import { IBM_Plex_Mono, Inter, Roboto } from "next/font/google";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 // Main font for UI and data
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
   preload: true,
 });
 
 // Monospace font for numerical data and code
 const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-ibm-plex-mono',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
 });
 
 // Additional font for headings (optional)
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-roboto',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
