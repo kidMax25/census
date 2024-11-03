@@ -158,7 +158,7 @@ const Map3D: React.FC<MapProps> = ({
         initialViewState={initialViewState}
         controller={{
           dragRotate: false, // Disable rotation
-          touchRotate: false, // Disable touch rotation
+          touchRotate: true, // Disable touch rotation
           keyboard: true, // Enable keyboard controls
           dragPan: true, // Enable panning
           touchZoom: true, // Enable touch zoom
