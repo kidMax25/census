@@ -16,3 +16,21 @@ export interface GeometryInterface {
     type: 'FeatureCollection';
     features: Feature[];
   }
+
+declare module '*.geojson' {
+  import { FeatureCollection } from 'geojson';
+
+  interface KenyaCountyProperties {
+    OBJECTID: number;
+    AREA: number;
+    PERIMETER: number;
+    COUNTY3_: number;
+    COUNTY3_ID: number;
+    COUNTY: string;
+    Shape_Leng: number;
+    Shape_Area: number;
+  }
+
+  const value: FeatureCollection<any, KenyaCountyProperties>;
+  export default value;
+}

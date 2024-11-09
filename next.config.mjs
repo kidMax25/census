@@ -2,10 +2,10 @@
 const nextConfig = {
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.(shp|shx|dbf|prj)$/,
-      type: 'asset/resource',
-      generator: {
-        filename: 'static/chunks/[path][name].[hash][ext]'
+      test: /\.geojson$/,
+      type: 'json',
+      parser: {
+        parse: JSON.parse
       }
     });
     return config;
