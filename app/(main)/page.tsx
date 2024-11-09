@@ -1,7 +1,7 @@
 // app/(main)/page.tsx
 "use client";
 
-import KenyaMap from "@/components/map/kenya-map";
+import D3Map from "@/components/map/d3-map";
 import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 
@@ -31,8 +31,8 @@ export default function Home() {
           {isLoading ? (
             <div className="w-full h-full animate-pulse bg-customGray" />
           ) : (
-            <div className="w-full h-full relative">
-              <KenyaMap />
+            <div className="w-full h-full relative p-4">
+              <D3Map />
             </div>
           )}
         </div>
