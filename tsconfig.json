@@ -23,7 +23,7 @@
       "@/*": ["./*"]
     },
     "baseUrl": ".",
-    "types": ["react", "react-dom", "node"]
+    "types": ["react", "react-dom", "node", "d3"]
   },
   "include": [
     "next-env.d.ts",
