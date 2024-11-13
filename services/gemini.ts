@@ -1,8 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(
-  process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
-    "AIzaSyAtd24ltZdZfZp6w9Cbnz2jewZmY0ZcdKA"
+  process.env.NEXT_PUBLIC_GEMINI_API_KEY || ""
 );
 
 export interface GeminiCountyInfo {
